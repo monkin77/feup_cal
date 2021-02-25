@@ -1,4 +1,7 @@
 #include "exercises.h"
+#include <iostream>
+
+using namespace std;
 
 bool Activity::operator==(const Activity &a2) const {
     return start == a2.start && finish == a2.finish;
@@ -9,9 +12,39 @@ bool Activity::overlaps(const Activity &a2) const {
 }
 
 std::vector<Activity> activitySelectionBacktracking(std::vector<Activity> A) {
-    //TODO
-    return A;
+    vector<Activity> currActivities = {};
+    vector<Activity> result = activitiesRec(A, currActivities);
+    return result;
 }
+
+vector<Activity> activitiesRec(vector<Activity> A, vector<Activity> currActivities){
+
+    std::vector<Activity> mostActivities = currActivities;
+
+    for(int i = 0; i < A.size(); i++){
+        Activity currActivity = A[i];
+        bool isValid = true;
+        for(auto elem : currActivities){
+            if(currActivity.overlaps(elem)){
+                isValid = false;
+                break;
+            }
+        }
+        if(isValid){
+            vector<Activity> remainingActivities = A;
+            vector<Activity> activitiesDone = currActivities;
+            remainingActivities.erase(remainingActivities.begin() + i);
+            activitiesDone.push_back(currActivity);
+            vector<Activity> specificActivities = activitiesRec(remainingActivities, activitiesDone);
+
+            if(specificActivities.size() > mostActivities.size()){
+                mostActivities = specificActivities;
+            }
+        }
+    }
+
+    return mostActivities;
+};
 
 /// TESTS ///
 #include <gtest/gtest.h>

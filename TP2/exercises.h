@@ -10,6 +10,8 @@
 #define MAZE_PATH 1
 #define MAZE_EXIT 2
 
+using namespace std;
+
 class Labyrinth {
 public:
     Labyrinth(int values[10][10]);
@@ -121,5 +123,7 @@ public:
     bool overlaps(const Activity &a2) const;
 };
 std::vector<Activity> activitySelectionBacktracking(std::vector<Activity> A);
+
+vector<Activity> activitiesRec(vector<Activity> A, vector<Activity> currActivities);
 
 #endif //CAL_TP2_CLASSES_EXERCISES_H
