@@ -1,0 +1,6 @@
+1- d)
+Loop invariant- Number of points
+Loop variant - n - 1 - i
+n and j are integers
+Not negative, since i <= n - 1
+Strictly decreasing, since i is always incrementing

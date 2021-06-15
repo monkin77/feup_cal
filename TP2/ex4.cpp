@@ -11,6 +11,7 @@ bool Activity::overlaps(const Activity &a2) const {
     return (start < a2.finish) && (a2.start < finish);
 }
 
+
 std::vector<Activity> activitySelectionBacktracking(std::vector<Activity> A) {
     vector<Activity> currActivities = {};
     vector<Activity> result = activitiesRec(A, currActivities);
